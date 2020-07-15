@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Navbar from './components/Navbar'
+import { Switch, Route } from 'react-router-dom';
+import Home from './views/Home';
+import Todos from './views/Todos';
+import Blog from './views/Blog';
+import Racer from './views/Racer';
+import Store from './views/Store';
+import ShopSingle from './views/ShopSingle';
+import Cart from './views/Cart';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <header>
+          <Navbar />
+        </header>
+
+        <main className="container">
+          <Switch>
+            <Route exact path='/' render={() => <Home />} />
+            <Route exact path='/todos' render={() => <Todos />} />
+            <Route exact path='/blog' render={() => <Blog />} />
+            <Route exact path='/racer' render={() => <Racer />} />
+            <Route exact path='/store' render={() => <Store />} />
+            <Route exact path='/store/:id' render={({match}) => <ShopSingle match={match} />} />
+            <Route exact path='/cart' render={() => <Cart />} />
+          </Switch>
+        </main>
+
+        <footer>
+
+        </footer>
+      </div>
+    )
+  }
 }
-
-export default App;
