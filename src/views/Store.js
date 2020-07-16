@@ -11,8 +11,8 @@ export default class Store extends Component {
         }
     }
 
-    componentDidMount() {
-        axios.get('https://fakestoreapi.com/products')
+    componentDidMount = async () => {
+        await axios.get('https://fakestoreapi.com/products')
             .then(res => this.setState({ products: res.data }))
     }
 

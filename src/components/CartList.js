@@ -2,17 +2,6 @@ import React, { Component } from 'react'
 import CartItem from './CartItem'
 
 export default class CartList extends Component {
-    constructor() {
-        super();
-        this.state = {
-            dataToChange: ''
-        }
-    }
-
-    doStuff = () => {
-        
-    }
-
     render() {
         const shallowCart = [...new Set(this.props.cart)];
 
@@ -23,7 +12,7 @@ export default class CartList extends Component {
                         return cartItem.id === item.id;
                     });
                     let numInCart = matches.length;
-                    return <CartItem dataToChange={this.state.dataToChange} item={item} key={item.id} numInCart={numInCart} removeItem={this.props.removeItem} />
+                    return <CartItem item={item} key={item.id} numInCart={numInCart} removeItem={this.props.removeItem} addItem={this.props.addItem} />
                 })
                 }
             </React.Fragment>

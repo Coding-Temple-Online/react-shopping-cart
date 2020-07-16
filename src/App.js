@@ -23,11 +23,21 @@ export default class App extends Component {
     })
   }
 
-  removeItem = item => {
-    this.setState({
-      cart: this.state.cart.filter(cartItem => item!==cartItem)
-    })
-    console.log(item);
+  removeItem = (item) => {
+    let cart = [...this.state.cart];
+    
+    // for (let i = 0; i < num; i++) {
+
+      let index = cart.indexOf(item);
+
+      if (index !== -1) {
+        cart.splice(index, 1);
+
+        this.setState({
+          cart: cart
+        })
+      }
+    // }
   }
 
   render() {
@@ -45,7 +55,7 @@ export default class App extends Component {
             <Route exact path='/racer' render={() => <Racer />} />
             <Route exact path='/store' render={() => <Store cart={this.state.cart} addItem={this.addItem} />} />
             <Route exact path='/store/:id' render={({match}) => <ShopSingle match={match} />} />
-            <Route exact path='/cart' render={() => <Cart cart={this.state.cart} removeItem={this.removeItem} />} />
+            <Route exact path='/cart' render={() => <Cart cart={this.state.cart} addItem={this.addItem} removeItem={this.removeItem} />} />
           </Switch>
         </main>
 

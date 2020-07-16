@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import CartList from '../components/CartList'
+import CartList from '../components/CartList';
+import { Link } from 'react-router-dom';
 
 export default class Cart extends Component {
     render() {
@@ -30,7 +31,7 @@ export default class Cart extends Component {
                                 </thead>
                                 <tbody>
                                     {/* Cart items */}
-                                    <CartList cart={this.props.cart} removeItem={this.props.removeItem} />
+                                    <CartList cart={this.props.cart} removeItem={this.props.removeItem} addItem={this.props.addItem} />
                                     {/* Cart items */}
                                     <tr>
                                         <td></td>
@@ -63,7 +64,7 @@ export default class Cart extends Component {
                     <div className="col mb-2">
                         <div className="row">
                             <div className="col-sm-12  col-md-6">
-                                <button className="btn btn-block btn-light">Continue Shopping</button>
+                                <Link to="/store" className="btn btn-lg btn-block btn-light">Continue Shopping</Link>
                             </div>
                             <div className="col-sm-12 col-md-6 text-right">
                                 <button className="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>

@@ -3,16 +3,23 @@ import React, { Component } from 'react'
 export default class CartItem extends Component {
     render() {
         const product = this.props.item;
-        this.props.dataToChange = 'it has been changed';
+
         return (
             <tr>
-                <td><img src={product.image} className="img-fluid" style={{maxWidth: '50px'}} /> </td>
+                <td><img alt={product.title} src={product.image} className="img-fluid" style={{maxWidth: '50px'}} /> </td>
                 <td>{product.title}</td>
                 <td>In stock</td>
-                <td>{this.props.numInCart}</td>
-                {/* <td><input className="form-control" type="text" defaultValue="1" /></td> */}
-                <td className="text-right">{product.price.toFixed(2)}</td>
-                <td className="text-right"><button className="btn btn-sm btn-danger" onClick={() => this.props.removeItem(product)}><i className="fa fa-trash"></i> </button> </td>
+                <td style={{textAlign: 'center'}}>{this.props.numInCart}</td>
+                {/* <td><input className="form-control" type="text" defaultValue={this.props.numInCart} style={{width: '20%', margin: '0 auto'}} name="quantity" /></td> */}
+                <td className="text-right">${product.price.toFixed(2)}</td>
+                <td className="text-right">
+                    <button className="btn btn-sm btn-danger" onClick={(e) => this.props.removeItem(product)}>
+                        <i className="fa fa-minus"></i> 
+                    </button>
+                    <button className="btn btn-sm btn-success" onClick={(e) => this.props.addItem(product)}>
+                        <i className="fa fa-plus"></i> 
+                    </button>
+                </td>
             </tr>
         )
     }
