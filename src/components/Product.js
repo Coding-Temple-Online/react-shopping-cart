@@ -13,12 +13,12 @@ export default class Product extends Component {
                             <img alt={product.title} className="img-fluid pic-1" src={product.image} />
                         </a>
                         <div style={{ margin: '5px 0' }}>
-                            <a className="add-to-cart btn btn-success btn-block" href="/">Add to cart</a>
+                            <button className="add-to-cart btn btn-success btn-block" onClick={() => this.props.addItem(product)}>Add to cart</button>
                         </div>
                     </div>
                     <div className="product-content">
                         <h5 className="title" style={{ textAlign: 'center' }}><Link to={`store/${product.id}`}>{product.title}</Link></h5>
-                        <span className="price">${product.price}</span>
+                        <span className="price">${product.price ? product.price.toFixed(2) : null}</span>
                     </div>
                 </div>
             </div>

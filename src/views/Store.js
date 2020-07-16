@@ -7,7 +7,7 @@ export default class Store extends Component {
         super();
 
         this.state = {
-            products: []
+            products: [],
         }
     }
 
@@ -21,7 +21,7 @@ export default class Store extends Component {
             <div className="container">
                 <h3 className="h3">Products </h3>
                 <div className="row">
-                    <ProductList products={this.state.products} />
+                    <ProductList products={this.state.products} cart={this.props.cart} addItem={this.props.addItem} />
                 </div>
             </div>
         )

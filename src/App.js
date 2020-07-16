@@ -10,11 +10,31 @@ import ShopSingle from './views/ShopSingle';
 import Cart from './views/Cart';
 
 export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cart: [],
+    }
+  }
+
+  addItem = item => {
+    this.setState({
+      cart: this.state.cart.concat(item)
+    })
+  }
+
+  removeItem = item => {
+    this.setState({
+      cart: this.state.cart.filter(cartItem => item!==cartItem)
+    })
+    console.log(item);
+  }
+
   render() {
     return (
       <div>
         <header>
-          <Navbar />
+          <Navbar cart={this.state.cart} />
         </header>
 
         <main className="container">
@@ -23,9 +43,9 @@ export default class App extends Component {
             <Route exact path='/todos' render={() => <Todos />} />
             <Route exact path='/blog' render={() => <Blog />} />
             <Route exact path='/racer' render={() => <Racer />} />
-            <Route exact path='/store' render={() => <Store />} />
+            <Route exact path='/store' render={() => <Store cart={this.state.cart} addItem={this.addItem} />} />
             <Route exact path='/store/:id' render={({match}) => <ShopSingle match={match} />} />
-            <Route exact path='/cart' render={() => <Cart />} />
+            <Route exact path='/cart' render={() => <Cart cart={this.state.cart} removeItem={this.removeItem} />} />
           </Switch>
         </main>
 

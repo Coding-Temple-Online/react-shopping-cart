@@ -24,7 +24,7 @@ export default class Navbar extends Component {
                             <Link className="nav-link" to="/racer">F1 Racer</Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="/" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store <span><i className="fa fa-shopping-cart"></i></span> <span className="badge badge-dark">1</span></a>
+                            <a className="nav-link dropdown-toggle" href="/" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Store <span><i className="fa fa-shopping-cart"></i></span> <span className="badge badge-dark">{this.props.cart ? this.props.cart.length : 0}</span></a>
                             <div className="dropdown-menu" aria-labelledby="dropdownId">
                                 <Link className="dropdown-item" to="/store">Products</Link>
                                 <Link className="dropdown-item" to="/cart">Cart</Link>
