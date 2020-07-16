@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import UserList from '../components/UserList';
+import firebase from '../firebase';
 
 export default class Home extends Component {
     constructor() {
@@ -10,21 +11,35 @@ export default class Home extends Component {
             formEmail: '',
             formLocation: ''
         }
+
+        this.db = firebase.firestore();
+    }
+
+    componentDidMount() {
+        this.db.collection('users').get().then(querySnapshot => {
+            let data = [];
+            querySnapshot.forEach(doc => {
+                data.push(doc.data())
+            })
+
+            this.setState({
+                users: data
+            })
+        })
     }
 
     handleSubmit = e => {
-        e.preDefault();
+        e.preventDefault();
 
-        this.setState({
-            users: this.state.users.concat({
-                name: e.target.name.value,
-                email: e.target.email.value,
-                location: e.target.location.value
-            }),
-            formName: '',
-            formEmail: '',
-            formLocation: ''
-        })
+        const user = {
+            firstName: e.target.firstName.value,
+            lastName: e.target.lastName.value,
+            location: e.target.location.value
+        }
+
+        this.db.collection('users').add(user)
+            .then(docRef => console.log("User created successfully"))
+            .catch(err => console.log(err));
     }
 
     render() {
@@ -34,11 +49,14 @@ export default class Home extends Component {
                     <div className="col-md-4">
                         <form action="" style={{ marginTop: '25px' }} onSubmit={this.handleSubmit}>
                             <div className="form-group">
-                                <input type="text" className="form-control" defaultValue={this.state.formName} name="name" placeholder="Name" />
+                                <input type="text" className="form-control" defaultValue={this.state.formFirstName} name="firstName" placeholder="First Name" />
                             </div>
                             <div className="form-group">
-                                <input type="text" className="form-control" defaultValue={this.state.formEmail} name="email" placeholder="Email" />
+                                <input type="text" className="form-control" defaultValue={this.state.formLastName} name="lastName" placeholder="Last Name" />
                             </div>
+                            {/* <div className="form-group">
+                                <input type="text" className="form-control" defaultValue={this.state.formEmail} name="email" placeholder="Email" />
+                            </div> */}
                             <div className="form-group">
                                 <input type="text" className="form-control" defaultValue={this.state.formLocation} name="location" placeholder="Location" />
                             </div>
