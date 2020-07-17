@@ -11,6 +11,7 @@ export default class Home extends Component {
             formEmail: '',
             formLocation: ''
         }
+        // test
 
         this.db = firebase.firestore();
     }
